@@ -1,0 +1,40 @@
+
+<h1>{{title}}</h1>
+<h3>Employee</h3>
+<hr />
+<form [formGroup]="employeeForm" (ngSubmit)="save()">
+  <div class="form-group row">
+    <label class=" control-label col-md-12">Name</label>
+      <input class="form-control" type="text" formControlName="name" id="name" name="name">
+    
+  </div>
+  <div class="form-group row">
+    <label class="control-label col-md-12" for="Gender">Gender</label>
+
+      <select class="form-control" data-val="true" formControlName="gender" id="gender" name="gender">
+        <option value="">-- Select Gender --</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+
+    
+  </div>
+  <div class="form-group row">
+    <label class="control-label col-md-12" for="Department">Department</label>
+
+      <input class="form-control" type="text" formControlName="department" id="department" name="department">
+
+    
+  </div>
+  <div class="form-group row">
+    <label class="control-label col-md-12" for="City">City</label>
+
+      <input class="form-control" type="text" formControlName="city" id="city" name="city">
+
+    
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-default">Save</button>
+    <button class="btn" (click)="cancel()">Cancel</button>
+  </div>
+</form>

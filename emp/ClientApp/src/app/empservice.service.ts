@@ -1,0 +1,59 @@
+import { Injectable, Inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+
+@Injectable()
+export class EmpserviceService {
+             
+  myAppUrl: string = "";
+
+  constructor(
+    private _http: HttpClient,
+    @Inject('BASE_URL') private baseUrl: string,
+    
+  ) {
+    this.myAppUrl = baseUrl;
+
+  }
+
+  getEmployees() {
+    return this._http.get(this.myAppUrl + 'api/Employee/Index')
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
+  getEmployeeById(id: number) {
+    return this._http.get(this.myAppUrl + "api/Employee/Details/" + id)
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler)
+  }
+
+  saveEmployee(employee) {
+    console.log(employee.value);
+
+
+    return this._http.post(this.myAppUrl + 'api/Employee/Create', employee)
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler)
+  }
+
+  updateEmployee(employee) {
+    return this._http.put(this.myAppUrl + 'api/Employee/Edit', employee)
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
+  deleteEmployee(id) {
+    return this._http.delete(this.myAppUrl + "api/Employee/Delete/" + id)
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler);
+  }
+
+  errorHandler(error: Response) {
+    console.log(error);
+    return Observable.throw(error);
+  }
+}  
